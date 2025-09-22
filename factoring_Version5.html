@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Factoring</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-title">Math Project V.1</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="polynomials.html">Polynomials</a></li>
+      <li><a href="factoring.html" class="active">Factoring</a></li>
+      <li><a href="complex-numbers.html">Complex Numbers</a></li>
+      <li><a href="practice.html">Practice</a></li>
+      <li><a href="flashcards.html">Flashcards</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section class="card">
+      <h1>Factoring</h1>
+      <h2>What is Factoring?</h2>
+      <p>
+        Factoring breaks down an expression into a product of simpler expressions. For example, <strong>x<sup>2</sup> - 9</strong> can be factored as <strong>(x + 3)(x - 3)</strong>.
+      </p>
+      <button class="accent-btn" onclick="showExamples()">Show Common Methods</button>
+      <ul id="factoringMethods" style="display:none;">
+        <li><strong>Greatest Common Factor (GCF)</strong></li>
+        <li><strong>Difference of Squares</strong></li>
+        <li><strong>Trinomials</strong></li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2>Interactive: Factor a Trinomial</h2>
+      <p>Factor <strong>x<sup>2</sup> + 6x + 9</strong>:</p>
+      <input type="text" id="factorInput" placeholder="Type your answer">
+      <button class="accent-btn" onclick="checkFactor()">Check Answer</button>
+      <span id="factorResult"></span>
+      <button class="accent-btn" onclick="showFactorHint()">Show Hint</button>
+      <span id="factorHint" style="display:none;">Hint: Try (x + a)<sup>2</sup> format.</span>
+    </section>
+    <section class="card">
+      <h2>Quiz: Difference of Squares</h2>
+      <p>What is the factored form of <strong>x<sup>2</sup> - 36</strong>?</p>
+      <label><input type="radio" name="diffSquares" value="(x+6)(x-6)"> (x + 6)(x - 6)</label>
+      <label><input type="radio" name="diffSquares" value="(x+18)(x-2)"> (x + 18)(x - 2)</label>
+      <label><input type="radio" name="diffSquares" value="(x+36)(x-1)"> (x + 36)(x - 1)</label><br>
+      <button class="accent-btn" onclick="checkDiffSquares()">Check</button>
+      <span id="diffSquaresResult"></span>
+    </section>
+    <section class="card">
+      <h2>Real-life Application</h2>
+      <p>Factoring is used in coding algorithms, cryptography, and physics formulas.</p>
+    </section>
+  </main>
+  <footer>
+    <p><a href="index.html">&larr; Back to Home</a></p>
+  </footer>
+  <script>
+    function showExamples() {
+      document.getElementById('factoringMethods').style.display = 'block';
+    }
+    function checkFactor() {
+      const val = document.getElementById('factorInput').value.replace(/\s+/g, '');
+      let result = document.getElementById('factorResult');
+      if(val === "(x+3)(x+3)" || val === "(x+3)^2") {
+        result.textContent = "Correct!";
+        result.style.color = "var(--accent)";
+      } else if (val.length) {
+        result.textContent = "Try again!";
+        result.style.color = "red";
+      } else {
+        result.textContent = "Type your answer.";
+        result.style.color = "orange";
+      }
+    }
+    function showFactorHint() {
+      document.getElementById('factorHint').style.display = "inline";
+    }
+    function checkDiffSquares() {
+      let ans = '';
+      document.querySelectorAll('input[name="diffSquares"]').forEach(el=>{
+        if(el.checked) ans=el.value;
+      });
+      const result = document.getElementById('diffSquaresResult');
+      if(ans==="(x+6)(x-6)") {
+        result.textContent="Correct!";
+        result.style.color="var(--accent)";
+      } else if(ans) {
+        result.textContent="Incorrect!";
+        result.style.color="red";
+      } else {
+        result.textContent="Select an answer.";
+        result.style.color="orange";
+      }
+    }
+  </script>
+</body>
+</html>

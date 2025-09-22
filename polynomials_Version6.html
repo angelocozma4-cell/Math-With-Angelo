@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Polynomials</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-title">Math Project V.1</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="polynomials.html" class="active">Polynomials</a></li>
+      <li><a href="factoring.html">Factoring</a></li>
+      <li><a href="complex-numbers.html">Complex Numbers</a></li>
+      <li><a href="practice.html">Practice</a></li>
+      <li><a href="flashcards.html">Flashcards</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section class="card">
+      <h1>Polynomials</h1>
+      <h2>What is a Polynomial?</h2>
+      <p>
+        A polynomial is an expression made up of variables and coefficients, combined using addition, subtraction, and multiplication. 
+        Example: <strong>3x<sup>2</sup> + 2x - 5</strong>.
+      </p>
+      <button class="accent-btn" onclick="showHint()">Show Key Features</button>
+      <ul id="polyFeatures" style="display:none;">
+        <li><strong>Degree:</strong> The highest exponent of the variable.</li>
+        <li><strong>Coefficient:</strong> The number in front of each variable.</li>
+        <li><strong>Constant term:</strong> A number without a variable.</li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2>Step-by-Step: Find the Degree</h2>
+      <input type="text" id="polyInput" placeholder="Type a polynomial (e.g. 4x^3 + x^2)">
+      <button class="accent-btn" onclick="checkPolyDegree()">Check Degree</button>
+      <p id="polyDegreeResult"></p>
+    </section>
+    <section class="card">
+      <h2>Quiz: Identify the Degree</h2>
+      <p>What is the degree of <strong>5x<sup>4</sup> - 2x<sup>3</sup> + 7</strong>?</p>
+      <label><input type="radio" name="degreeQ" value="2">2</label>
+      <label><input type="radio" name="degreeQ" value="3">3</label>
+      <label><input type="radio" name="degreeQ" value="4">4</label><br>
+      <button class="accent-btn" onclick="checkDegreeQ()">Check Answer</button>
+      <span id="degreeQuizResult"></span>
+    </section>
+    <section class="card">
+      <h2>Real-life Application</h2>
+      <p>Polynomials are used in computer graphics, predicting population growth, and designing roller coasters!</p>
+    </section>
+  </main>
+  <footer>
+    <p><a href="index.html">&larr; Back to Home</a></p>
+  </footer>
+  <script>
+    function showHint() {
+      document.getElementById('polyFeatures').style.display = 'block';
+    }
+    function checkPolyDegree() {
+      const input = document.getElementById('polyInput').value;
+      const matches = input.match(/x\^(\d+)/g);
+      let maxDegree = 0;
+      if (matches) {
+        for (const m of matches) {
+          const degree = parseInt(m.replace('x^',''));
+          if (degree > maxDegree) maxDegree = degree;
+        }
+      } else if (input.includes('x')) {
+        maxDegree = 1;
+      }
+      document.getElementById('polyDegreeResult').textContent = 
+        input.length ? ("The degree is: " + maxDegree) : "Please enter a polynomial.";
+      document.getElementById('polyDegreeResult').style.color = maxDegree ? "var(--accent)" : "red";
+    }
+    function checkDegreeQ() {
+      let ans = '';
+      document.querySelectorAll('input[name="degreeQ"]').forEach(el=>{
+        if(el.checked) ans=el.value;
+      });
+      const result = document.getElementById('degreeQuizResult');
+      if(ans==="4") {
+        result.textContent="Correct!";
+        result.style.color="var(--accent)";
+      } else if(ans) {
+        result.textContent="Incorrect!";
+        result.style.color="red";
+      } else {
+        result.textContent="Select an answer.";
+        result.style.color="orange";
+      }
+    }
+  </script>
+</body>
+</html>
